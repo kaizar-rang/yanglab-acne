@@ -12,7 +12,9 @@ OUTPUT_DIR = Path("data/patches")
 # Positive patches contain acne (from bounding boxes)
 # Negative patches are random clear skin crops from the same image
 
+# Make output folders in data/patches, if they dont already exist
 def create_output_dirs():
     for split in ["train", "val"]:
         for label in ["acne", "clear"]:
             os.makedirs(OUTPUT_DIR / split / label, exist_ok=True)
+
