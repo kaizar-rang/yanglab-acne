@@ -1,8 +1,7 @@
-import os # navigate file paths
-import cv2 # OpenCV for reading/cropping images
-import numpy as np # Numerical operations on image arrays
-from pathlib import Path # Cleanly handle file paths
-
+import os 
+import cv2 
+import numpy as np 
+from pathlib import Path 
 # Tells scripts where to find inputs/outputs
 ACNE04_IMAGES = Path("data/acne04/train/images")
 ACNE04_LABELS = Path("data/acne04/train/labels")
