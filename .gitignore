@@ -3,4 +3,6 @@ data/acne04_coco/
 data/dermnet/
 data/patches/
 outputs/checkpoints/
+yolov5/
+DINO/
 .env
