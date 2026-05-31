@@ -97,6 +97,8 @@ def extract_negative_patch(image, boxes, img_w, img_h, patch_size=(224, 224)):
 
         if not overlap:
             patch = image[ry1:ry2, rx1:rx2]
+            if np.mean(patch) < 20:
+                continue
             return cv2.resize(patch, patch_size)
 
     return None
