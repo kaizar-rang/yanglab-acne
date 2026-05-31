@@ -119,12 +119,14 @@ def process_image(image_path, label_path, split, patch_idx):
         patch_idx += 1
     
     # Extract one negative patch per image
-    neg_patch = extract_negative_patch(image, boxes, img_w, img_h)
-    if neg_patch is not None:
-        output_path = OUTPUT_DIR / split / "clear" / f"patch_{patch_idx:05d}.jpg"
-        cv2.imwrite(str(output_path), neg_patch)
-        patch_idx += 1
-    
+
+    for i in range(3):
+        neg_patch = extract_negative_patch(image, boxes, img_w, img_h)
+        if neg_patch is not None:
+            output_path = OUTPUT_DIR / split / "clear" / f"patch_{patch_idx:05d}.jpg"
+            cv2.imwrite(str(output_path), neg_patch)
+            patch_idx += 1
+        
     return patch_idx
 
 def main():
