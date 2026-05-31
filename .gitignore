@@ -1,8 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+*.so
+
+# Environments
+.env
+.venv/
+venv/
+*.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data 
 data/acne04/
 data/acne04_coco/
 data/dermnet/
 data/patches/
-outputs/checkpoints/
+
+# Generated outputs
+outputs/
+
+# Model repos
+yolov5/
+DINO/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Kaggle
+kaggle.json
+
+
+data/acne04/
+data/acne04_coco/
+data/dermnet/
+data/patches/
+outputs/
 yolov5/
 DINO/
 .env
+

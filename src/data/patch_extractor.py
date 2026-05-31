@@ -3,8 +3,10 @@ import cv2
 import numpy as np 
 from pathlib import Path 
 # Tells scripts where to find inputs/outputs
-ACNE04_IMAGES = Path("data/acne04/train/images")
-ACNE04_LABELS = Path("data/acne04/train/labels")
+ACNE04_TRAIN_IMAGES = Path("data/acne04/train/images")
+ACNE04_TRAIN_LABELS = Path("data/acne04/train/labels")
+ACNE04_VAL_IMAGES = Path("data/acne04/valid/images")
+ACNE04_VAL_LABELS = Path("data/acne04/valid/labels")
 OUTPUT_DIR = Path("data/patches") 
 
 # Patches are small cropped regions of skin (224x224). 
@@ -138,28 +140,21 @@ def process_image(image_path, label_path, split, patch_idx):
 def main():
     create_output_dirs()
     
-    # Get all image files
-    image_files = sorted(ACNE04_IMAGES.glob("*.jpg"))
-    
-    # Split into train and val (80/20)
-    split_idx = int(len(image_files) * 0.8)
-    train_files = image_files[:split_idx]
-    val_files = image_files[split_idx:]
+    train_files = sorted(ACNE04_TRAIN_IMAGES.glob("*.jpg"))
+    val_files = sorted(ACNE04_VAL_IMAGES.glob("*.jpg"))
     
     patch_idx = 0
     
-    # Process training images
     print(f"Processing {len(train_files)} training images...")
     for image_path in train_files:
-        label_path = ACNE04_LABELS / image_path.with_suffix(".txt").name
+        label_path = ACNE04_TRAIN_LABELS / image_path.with_suffix(".txt").name
         if not label_path.exists():
             continue
         patch_idx = process_image(image_path, label_path, "train", patch_idx)
     
-    # Process validation images
     print(f"Processing {len(val_files)} validation images...")
     for image_path in val_files:
-        label_path = ACNE04_LABELS / image_path.with_suffix(".txt").name
+        label_path = ACNE04_VAL_LABELS / image_path.with_suffix(".txt").name
         if not label_path.exists():
             continue
         patch_idx = process_image(image_path, label_path, "val", patch_idx)
