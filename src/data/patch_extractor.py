@@ -66,36 +66,40 @@ def save_patch(image, x1, y1, x2, y2, output_path, patch_size=(224, 224)):
     # Save the patch to disk
     cv2.imwrite(str(output_path), patch)
 
+
 def extract_negative_patch(image, boxes, img_w, img_h, patch_size=(224, 224)):
-    # Convert all boxes to pixel coordinates
     pixel_boxes = []
+    box_sizes = []
+    
     for _, x_center, y_center, width, height in boxes:
         x1, y1, x2, y2 = yolo_to_pixels(x_center, y_center, width, height, img_w, img_h)
         pixel_boxes.append((x1, y1, x2, y2))
+        box_sizes.append((x2 - x1, y2 - y1))
     
-    # Try random crops until we find one that doesn't overlap with any acne box
+    # Use average box size for negative crop, fallback to patch_size if no boxes
+    if box_sizes:
+        avg_w = max(20, int(np.mean([s[0] for s in box_sizes])))
+        avg_h = max(20, int(np.mean([s[1] for s in box_sizes])))
+    else:
+        avg_w, avg_h = patch_size
+
     for _ in range(50):
-        # Pick a random top-left corner
-        rx1 = np.random.randint(0, img_w - patch_size[0])
-        ry1 = np.random.randint(0, img_h - patch_size[1])
-        rx2 = rx1 + patch_size[0]
-        ry2 = ry1 + patch_size[1]
-        
-        # Check if this random crop overlaps with any acne bounding box
+        rx1 = np.random.randint(0, max(1, img_w - avg_w))
+        ry1 = np.random.randint(0, max(1, img_h - avg_h))
+        rx2 = rx1 + avg_w
+        ry2 = ry1 + avg_h
+
         overlap = False
         for (x1, y1, x2, y2) in pixel_boxes:
             if rx1 < x2 and rx2 > x1 and ry1 < y2 and ry2 > y1:
                 overlap = True
                 break
-        
-        # If no overlap found, crop and return it
+
         if not overlap:
             patch = image[ry1:ry2, rx1:rx2]
             return cv2.resize(patch, patch_size)
-    
-    # If we couldn't find a clean crop after 50 tries, return None
-    return None
 
+    return None
 
 def process_image(image_path, label_path, split, patch_idx):
     # Load the image
