@@ -28,3 +28,23 @@ pip install -r requirements.txt
 
 ### 4. Add your API keys
 Create a `.env` file in the repo root (never commit this file):
+
+```bash
+touch .env
+```
+
+### 5. Setup
+
+### 6. Preprocessing
+
+After setup, run the patch extractor to generate training patches for Part 2:
+
+```bash
+python src/data/patch_extractor.py
+```
+
+This will populate `data/patches/` with ~48k labeled patches. Expected output:
+- `data/patches/train/acne/` — ~39,713 patches
+- `data/patches/train/clear/` — ~8,919 patches
+- `data/patches/val/acne/` — ~3,423 patches
+- `data/patches/val/clear/` — ~849 patches
