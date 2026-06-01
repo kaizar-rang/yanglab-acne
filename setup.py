@@ -129,14 +129,55 @@ def download_dermnet():
     
     print("Done.\n")
 
+def clone_yolov5():
+    print("Cloning YOLOv5...")
+    import subprocess
+    if not Path("yolov5").exists():
+        subprocess.run(["git", "clone", "https://github.com/ultralytics/yolov5"], check=True)
+        subprocess.run(["pip", "install", "-r", "yolov5/requirements.txt"], check=True)
+    else:
+        print("YOLOv5 already cloned, skipping...")
+    print("Done.\n")
+
+
+def create_yolo_config():
+    print("Creating YOLOv5 config...")
+    import yaml
+    config = {
+        "train": "data/acne04/train/images",
+        "val": "data/acne04/valid/images",
+        "test": "data/acne04/test/images",
+        "nc": 4,
+        "names": ["nodules and cysts", "papules", "pustules", "whitehead and blackhead"]
+    }
+    os.makedirs("configs", exist_ok=True)
+    with open("configs/acne04.yaml", "w") as f:
+        yaml.dump(config, f, default_flow_style=False)
+    print("Done.\n")
+
 
 if __name__ == "__main__":
-    # This block only runs when you execute `python setup.py` directly.
-    # If another script imports from setup.py, these lines won't fire.
-    # Check keys first, create folders second, then download.
     check_env()
     create_directories()
-    download_acne04()
-    download_acne04_coco()
-    download_dermnet()
+
+    print("Which datasets would you like to download?")
+    print("  1. ACNE04 (YOLOv5)")
+    print("  2. ACNE04 (COCO)")
+    print("  3. DermNet")
+    print("  4. All")
+    print("  5. Skip downloads")
+
+    choice = input("\nEnter your choice (1-5): ").strip()
+
+    if choice in ("1", "4"):
+        download_acne04()
+    if choice in ("2", "4"):
+        download_acne04_coco()
+    if choice in ("3", "4"):
+        download_dermnet()
+    if choice == "5":
+        print("Skipping downloads.\n")
+
+    clone_yolov5()
+    create_yolo_config()
     print("Setup complete. You are ready to go.")

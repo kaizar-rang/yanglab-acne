@@ -1,0 +1,9 @@
+names:
+- nodules and cysts
+- papules
+- pustules
+- whitehead and blackhead
+nc: 4
+test: data/acne04/test/images
+train: data/acne04/train/images
+val: data/acne04/valid/images
