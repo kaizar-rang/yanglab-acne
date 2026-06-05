@@ -16,7 +16,7 @@ venv/
 # Jupyter
 .ipynb_checkpoints/
 
-# Data 
+# Data
 data/acne04/
 data/acne04_coco/
 data/dermnet/
@@ -29,6 +29,9 @@ outputs/
 yolov5/
 DINO/
 
+# Model weights
+*.pt
+
 # OS
 .DS_Store
 Thumbs.db
@@ -39,15 +42,3 @@ Thumbs.db
 
 # Kaggle
 kaggle.json
-
-
-data/acne04/
-data/acne04_coco/
-data/dermnet/
-data/patches/
-outputs/
-yolov5/
-DINO/
-.env
-
-yolov5s.pt

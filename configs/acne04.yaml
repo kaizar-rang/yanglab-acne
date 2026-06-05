@@ -4,6 +4,6 @@ names:
 - pustules
 - whitehead and blackhead
 nc: 4
-test: data/acne04/test/images
-train: data/acne04/train/images
-val: data/acne04/valid/images
+test: /Users/krangwala/Desktop/Research/Yang lab/yanglab-acne/data/acne04/test/images
+train: /Users/krangwala/Desktop/Research/Yang lab/yanglab-acne/data/acne04/train/images
+val: /Users/krangwala/Desktop/Research/Yang lab/yanglab-acne/data/acne04/valid/images
