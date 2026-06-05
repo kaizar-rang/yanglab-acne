@@ -50,3 +50,4 @@ yolov5/
 DINO/
 .env
 
+yolov5s.pt

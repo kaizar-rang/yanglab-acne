@@ -143,10 +143,12 @@ def clone_yolov5():
 def create_yolo_config():
     print("Creating YOLOv5 config...")
     import yaml
+    
+    repo_root = Path.cwd()
     config = {
-        "train": "data/acne04/train/images",
-        "val": "data/acne04/valid/images",
-        "test": "data/acne04/test/images",
+        "train": str(repo_root / "data/acne04/train/images"),
+        "val": str(repo_root / "data/acne04/valid/images"),
+        "test": str(repo_root / "data/acne04/test/images"),
         "nc": 4,
         "names": ["nodules and cysts", "papules", "pustules", "whitehead and blackhead"]
     }
