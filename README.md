@@ -86,29 +86,27 @@ Expected output:
 
 ---
 
-## Training
+## Training Detection Models
 
-Training is designed to run on a GPU. Open the relevant notebook in Google Colab with a T4 GPU runtime:
+Training is designed to run on a GPU. Open the relevant notebook in Google Colab / Kaggle Notebook with a T4 GPU runtime:
 
 - **YOLOv5:** `notebooks/02_training_yolo.ipynb`
 - **Faster R-CNN:** `notebooks/03_training_frcnn.ipynb`
+- **YOLOv8s & YOLOv8-P2:** `notebooks/04_training_yolov8.ipynb`
 
 Each notebook is self-contained — it clones the repo, downloads data, trains the model, and downloads results to your local machine. Run the download cell immediately after training finishes before closing the session.
 
 ---
 
-## Inference
+## Training Detection Models
 
-Pretrained weights will be available via GitHub Releases once training is complete.
+Training is designed to run on a GPU. Open the relevant notebook in Google Colab / Kaggle Notebook with a T4 GPU runtime:
+
+- **EfficientNetB0 Classifier on DermNet** `notebooks/05_classification.ipynb`
+
+Each notebook is self-contained — it clones the repo, downloads data, trains the model, and downloads results to your local machine. Run the download cell immediately after training finishes before closing the session.
 
 ---
 
-## Notebooks
 
-| Notebook | Description |
-|---|---|
-| `01_eda.ipynb` | Dataset statistics, class distribution, sample visualizations |
-| `02_training_yolo.ipynb` | YOLOv5s training on ACNE04 (Colab) |
-| `03_training_frcnn.ipynb` | Faster R-CNN training on ACNE04 (Colab) |
-| `04_evaluation.ipynb` | mAP, precision, recall, IoU comparison across models |
-| `05_visualization.ipynb` | Bounding box overlays and Grad-CAM visualizations |
+
