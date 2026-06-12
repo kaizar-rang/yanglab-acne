@@ -94,7 +94,7 @@ Training is designed to run on a GPU. Open the relevant notebook in Google Colab
 - **Faster R-CNN:** `notebooks/03_training_frcnn.ipynb`
 - **YOLOv8s & YOLOv8-P2:** `notebooks/04_training_yolov8.ipynb`
 
-Each notebook is self-contained — it clones the repo, downloads data, trains the model, and downloads results to your local machine. Run the download cell immediately after training finishes before closing the session.
+Each notebook is self-contained. It clones the repo, downloads data, trains the model, and downloads results to your local machine. Run the download cell immediately after training finishes before closing the session.
 
 ---
 
@@ -104,7 +104,7 @@ Training is designed to run on a GPU. Open the relevant notebook in Google Colab
 
 - **EfficientNetB0 Classifier on DermNet** `notebooks/05_classification.ipynb`
 
-Each notebook is self-contained — it clones the repo, downloads data, trains the model, and downloads results to your local machine. Run the download cell immediately after training finishes before closing the session.
+Each notebook is self-contained. It clones the repo, downloads data, trains the model, and downloads results to your local machine. Run the download cell immediately after training finishes before closing the session.
 
 ---
 
