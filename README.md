@@ -98,7 +98,7 @@ Each notebook is self-contained — it clones the repo, downloads data, trains t
 
 ---
 
-## Training Detection Models
+## Training Classification Models
 
 Training is designed to run on a GPU. Open the relevant notebook in Google Colab / Kaggle Notebook with a T4 GPU runtime:
 
