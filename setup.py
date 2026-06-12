@@ -49,6 +49,7 @@ def create_directories():
 
     dirs = [
         "data/acne04",           # raw ACNE04 images + labels in YOLOv5 format
+        "data/acne04_yolov8",    # same images, YOLOv8/RT-DETR format (data.yaml manifest)
         "data/acne04_coco",      # same images, COCO format for Faster R-CNN
         "data/dermnet",          # raw DermNet images
         "data/patches/train/acne",   # positive training patches (acne crops)
@@ -84,6 +85,23 @@ def download_acne04():
     project = rf.workspace("acne-vulgaris-detection").project("acne04-detection")
     version = project.version(1)
     dataset = version.download("yolov5", location="data/acne04", overwrite=True)
+    print(f"Downloaded to: {dataset.location}")
+    print("Done.\n")
+
+# Downloads ACNE04 in YOLOv8 format from Roboflow.
+def download_acne04_yolov8():
+    """
+    Downloads ACNE04 in YOLOv8 format from Roboflow.
+    Same images as the YOLOv5 download, but with a data.yaml manifest
+    expected by the Ultralytics YOLOv8 / RT-DETR trainer API.
+    Used for Part 1 modern-architecture training (YOLOv8s, YOLOv8s-P2).
+    """
+    print("Downloading ACNE04 (YOLOv8 format)...")
+    from roboflow import Roboflow
+    rf = Roboflow(api_key=ROBOFLOW_API_KEY)
+    project = rf.workspace("acne-vulgaris-detection").project("acne04-detection")
+    version = project.version(1)
+    dataset = version.download("yolov8", location="data/acne04_yolov8", overwrite=True)
     print(f"Downloaded to: {dataset.location}")
     print("Done.\n")
 
@@ -164,20 +182,23 @@ if __name__ == "__main__":
 
     print("Which datasets would you like to download?")
     print("  1. ACNE04 (YOLOv5)")
-    print("  2. ACNE04 (COCO)")
-    print("  3. DermNet")
-    print("  4. All")
-    print("  5. Skip downloads")
+    print("  2. ACNE04 (YOLOv8)")
+    print("  3. ACNE04 (COCO)")
+    print("  4. DermNet")
+    print("  5. All")
+    print("  6. Skip downloads")
 
-    choice = input("\nEnter your choice (1-5): ").strip()
+    choice = input("\nEnter your choice (1-6): ").strip()
 
-    if choice in ("1", "4"):
+    if choice in ("1", "5"):
         download_acne04()
-    if choice in ("2", "4"):
+    if choice in ("2", "5"):
+        download_acne04_yolov8()
+    if choice in ("3", "5"):
         download_acne04_coco()
-    if choice in ("3", "4"):
+    if choice in ("4", "5"):
         download_dermnet()
-    if choice == "5":
+    if choice == "6":
         print("Skipping downloads.\n")
 
     clone_yolov5()
